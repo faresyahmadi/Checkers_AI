@@ -1,4 +1,4 @@
-# 🚀 AI Checkers Game :rocket 
+# 🚀 AI Checkers Game 🚀
 This project aims to develop an optimized AI model capable of playing Checkers against a human opponent.
 For the first part of the project, I set up the game Interface along with the logic of the game: Pawn movement, king movement etc ..  
 
