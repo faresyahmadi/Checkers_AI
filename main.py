@@ -1,8 +1,10 @@
 import pygame
+pygame.init()
 from Checkers.constants import WIDTH, HEIGHT, SQUARE_SIZE, RED, WHITE
 from Checkers.board import Board
 from Checkers.game import Game
 from minimax.algorithm import minimax
+from Checkers.welcome import welcome_screen
 
 
 FPS = 60
@@ -16,6 +18,8 @@ def get_row_col_from_mouse(pos):
     return row,col
 
 def main(): 
+
+    welcome_screen (WIN, WIDTH, HEIGHT)
     run = True
     clock = pygame.time.Clock()
     game = Game(WIN)
@@ -25,6 +29,7 @@ def main():
         if game.turn == WHITE: 
             value, new_board = minimax(game.get_board(), 3, WHITE, game)
             game.ai_move(new_board)
+        
 
         clock.tick(FPS)
 
