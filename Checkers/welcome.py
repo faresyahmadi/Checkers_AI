@@ -8,13 +8,15 @@ def welcome_screen(win, width, height):
     RED = (204, 0, 0)
     WHITE = (255, 255, 255)
     YELLOW = (255,255,0)
+    GREEN = (0, 0, 255)
 
     # Set up font
     font = pygame.font.SysFont(None, 48)
 
     # Define button rectangles
-    play_button = pygame.Rect(width // 2 - 100, height // 2 - 60, 200, 50)
-    quit_button = pygame.Rect(width // 2 - 100, height // 2 + 10, 200, 50)
+    play_button = pygame.Rect(width // 2 - 100, height // 2 - 120, 400, 50)
+    ai_button = pygame.Rect(width // 2 - 100, height // 2 - 50,400, 50)
+    quit_button = pygame.Rect(width // 2 - 100, height // 2 + 20, 400, 50)
 
     # Load and scale background image
     try:
@@ -39,7 +41,11 @@ def welcome_screen(win, width, height):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 # Check if the Play button was clicked
                 if play_button.collidepoint(event.pos):
-                    return 
+                    pygame.mixer.music.stop()
+                    return "player vs player"
+                if ai_button.collidepoint(event.pos):
+                    pygame.mixer.music.stop()
+                    return "ai vs player"
                 # Check if the Quit button was clicked
                 if quit_button.collidepoint(event.pos):
                     pygame.quit()
@@ -58,9 +64,16 @@ def welcome_screen(win, width, height):
 
         # Draw the Play button
         pygame.draw.rect(win, BLUE, play_button)
-        play_text = font.render("Play", True, WHITE)
+        play_text = font.render("Player vs Player", True, WHITE)
         play_rect = play_text.get_rect(center=play_button.center)
         win.blit(play_text, play_rect)
+
+        # Draw the AI button
+        pygame.draw.rect(win, GREEN, ai_button)
+        ai_text = font.render("Computer vs Player", True, WHITE)
+        ai_rect = ai_text.get_rect(center=ai_button.center)
+        win.blit(ai_text, ai_rect)
+
 
         # Draw the Quit button
         pygame.draw.rect(win, RED, quit_button)

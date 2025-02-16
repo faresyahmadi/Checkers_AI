@@ -6,7 +6,8 @@ class Game:
 
     def __init__(self,win): 
         self._init()
-        self.win = win
+        self.win =win
+        
 
     def update(self):
         self.board.draw(self.win)

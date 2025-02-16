@@ -19,22 +19,24 @@ def get_row_col_from_mouse(pos):
 
 def main(): 
 
-    welcome_screen (WIN, WIDTH, HEIGHT)
+    game_mode = welcome_screen (WIN, WIDTH, HEIGHT)
     run = True
     clock = pygame.time.Clock()
     game = Game(WIN)
-    while run: 
+    while run:
+
+        clock.tick(FPS)
 
         ### MINIMAX IMPLEMENTATION ### 
-        if game.turn == WHITE: 
+        if game.turn == WHITE and game_mode == 'ai vs player': 
             value, new_board = minimax(game.get_board(), 3, WHITE, game)
             game.ai_move(new_board)
         
 
-        clock.tick(FPS)
-
         if game.winner != None: 
             print (game.winner())
+        else: 
+            break
             
         for event in pygame.event.get():
             if event.type == pygame.QUIT: 
