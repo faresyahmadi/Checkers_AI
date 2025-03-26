@@ -3,22 +3,22 @@ import sys
 
 def welcome_screen(win, width, height):
 
-    # Define colors for buttons and text
+    
     BLUE = (0, 122, 204)
     RED = (204, 0, 0)
     WHITE = (255, 255, 255)
     YELLOW = (255,255,0)
     GREEN = (0, 0, 255)
 
-    # Set up font
+    
     font = pygame.font.SysFont(None, 48)
 
-    # Define button rectangles
+    
     play_button = pygame.Rect(width // 2 - 100, height // 2 - 120, 400, 50)
     ai_button = pygame.Rect(width // 2 - 100, height // 2 - 50,400, 50)
     quit_button = pygame.Rect(width // 2 - 100, height // 2 + 20, 400, 50)
 
-    # Load and scale background image
+    
     try:
         background = pygame.image.load('assets/background.jpg')
         background = pygame.transform.scale(background, (width, height))
@@ -26,7 +26,7 @@ def welcome_screen(win, width, height):
         print("Background image not found or error loading image:", e)
         background = None
 
-    # Load and play background music (ensure the file exists or update the path)
+    
     try:
         pygame.mixer.music.load('assets/non.mp3')
         pygame.mixer.music.play(-1)  # Loop indefinitely
@@ -39,43 +39,37 @@ def welcome_screen(win, width, height):
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                # Check if the Play button was clicked
+                
                 if play_button.collidepoint(event.pos):
                     pygame.mixer.music.stop()
                     return "player vs player"
                 if ai_button.collidepoint(event.pos):
                     pygame.mixer.music.stop()
                     return "ai vs player"
-                # Check if the Quit button was clicked
+              
                 if quit_button.collidepoint(event.pos):
                     pygame.quit()
                     sys.exit()
 
-        # Draw the background image if loaded; otherwise, fill with a fallback color
         if background:
             win.blit(background, (0, 0))
         else:
-            win.fill((0, 0, 0))  # Fallback: fill with black
+            win.fill((0, 0, 0))  
 
-        # Display title text
         title_text = font.render("Welcome to Fares Checkers", True,YELLOW)
         title_rect = title_text.get_rect(center=(width // 2, height // 2 - 150))
         win.blit(title_text, title_rect)
 
-        # Draw the Play button
         pygame.draw.rect(win, BLUE, play_button)
         play_text = font.render("Player vs Player", True, WHITE)
         play_rect = play_text.get_rect(center=play_button.center)
         win.blit(play_text, play_rect)
 
-        # Draw the AI button
         pygame.draw.rect(win, GREEN, ai_button)
         ai_text = font.render("Computer vs Player", True, WHITE)
         ai_rect = ai_text.get_rect(center=ai_button.center)
         win.blit(ai_text, ai_rect)
 
-
-        # Draw the Quit button
         pygame.draw.rect(win, RED, quit_button)
         quit_text = font.render("Quit", True, WHITE)
         quit_rect = quit_text.get_rect(center=quit_button.center)

@@ -27,9 +27,9 @@ def main():
 
         clock.tick(FPS)
 
-        ### MINIMAX IMPLEMENTATION ### 
+        ### MINIMAX Alpha Beta Pruning IMPLEMENTATION ### 
         if game.turn == WHITE and game_mode == 'ai vs player': 
-            value, new_board = minimax(game.get_board(), 3, WHITE, game)
+            value, new_board = minimax(game.get_board(), 3, WHITE, game, float('-inf'), float('inf'))
             game.ai_move(new_board)
         
 
